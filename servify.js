@@ -5,6 +5,7 @@ module.exports = (function(){
     var nodeRequire = require;
     var express = nodeRequire("express");
     var rq = nodeRequire("request");
+    var bodyParser = nodeRequire("body-parser");
   } else {
     var rq = require("xhr");
   };
@@ -12,12 +13,18 @@ module.exports = (function(){
   function api(port, api){
     return new Promise(function(resolve, reject){
       var app = express();
+      app.use(bodyParser.json());
       function callFunc(req, res){
         try {
           var url = req.url;
           var parens = url.indexOf("(");
-          var name = url.slice(1, parens);
-          var args = JSON.parse("["+decodeURIComponent(url.slice(parens+1, -1))+"]");
+          if (parens !== -1){
+            var name = url.slice(1, parens);
+            var args = JSON.parse("["+decodeURIComponent(url.slice(parens+1, -1))+"]");
+          } else {
+            var name = url.slice(1);
+            var args = req.body;
+          }
           var result = api[name].apply(null, args);
           res.header("Access-Control-Allow-Origin", "*");
           res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

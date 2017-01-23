@@ -1,6 +1,6 @@
 {
   "name": "servify",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "",
   "main": "servify.js",
   "scripts": {
@@ -10,12 +10,13 @@
   "author": "MaiaVictor",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.16.0",
     "express": "^4.14.0",
     "request": "^2.79.0",
     "xhr": "^2.3.3"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/maiavictor/servify"
+    "type": "git",
+    "url": "https://github.com/maiavictor/servify"
   }
 }
