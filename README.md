@@ -7,10 +7,10 @@ Microservices the simplest way conceivable.
 ### Create a microservice:
 
 ```javascript
-var servify = require("servify");
+const servify = require("servify");
 
 // The service state
-var count = 0;
+let count = 0;
 
 // Starts a microservice with 3 API methods
 servify.api(3000, {
@@ -30,10 +30,10 @@ servify.api(3000, {
 ### Call a microservice from code:
 
 ```javascript
-var servify = require("servify");
+const servify = require("servify");
 
 // Builds the API interface from an URL
-var api = servify.at("http://localhost:3000");
+const api = servify.at("http://localhost:3000");
 
 // Calls API methods like normal lib functions
 api.square(2)
