@@ -4,6 +4,7 @@ module.exports = (function(){
   if (!process.browser){
     var nodeRequire = require;
     var express = nodeRequire("express");
+    var cors = nodeRequire("cors");
     var rq = nodeRequire("request");
     var bodyParser = nodeRequire("body-parser");
   } else {
@@ -14,6 +15,12 @@ module.exports = (function(){
     return new Promise(function(resolve, reject){
       var app = express();
       app.use(bodyParser.json());
+      app.use(cors());
+      app.use(function (error, req, res, next){
+          if (error.message === "invalid json")
+            res.send("null");
+          else next();
+      });
       function callFunc(req, res){
         try {
           var url = req.url;
@@ -23,11 +30,9 @@ module.exports = (function(){
             var args = JSON.parse("["+decodeURIComponent(url.slice(parens+1, -1))+"]");
           } else {
             var name = url.slice(1);
-            var args = req.body;
+            var args = [req.body];
           }
           var result = api[name].apply(null, args);
-          res.header("Access-Control-Allow-Origin", "*");
-          res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
           if (result.then)
             result.then(result => res.json(result));
           else
