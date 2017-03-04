@@ -56,6 +56,10 @@ http://localhost:3000/concat([1,2], [3,4])
 http://localhost:3000/count()
 ```
 
+## Support
+
+This requires ES6 Proxy support, so only you need node.js 6 and up.
+
 ## Why
 
 When all you want is to create a microservice, [Express.js](http://expressjs.com) becomes annoyingly verbose. You have to worry about things like serializing/deserializing JSON, chosing how to format query/param inputs, picking a XHR lib on the client and so on. Servify is a ridiculously thin (50 LOC) lib that just standardizes that boring stuff. To create a microservice, all you need is an object of functions specifying your API. To interact with a service, all you need is its URL. You can then call its functions exactly like you would call a normal lib (except it returns a Promise, obviously).
