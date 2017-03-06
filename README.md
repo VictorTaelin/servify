@@ -58,7 +58,7 @@ http://localhost:3000/count()
 
 ## Support
 
-This requires ES6 Proxy support, so only you need node.js 6 and up.
+This requires ES6 Proxy support, so you need node.js 6 and up. Proxies cannot be polyfilled in earlier versions.
 
 ## Why
 
