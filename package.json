@@ -2,6 +2,9 @@
   "name": "servify",
   "version": "0.1.11",
   "description": "",
+  "engines": {
+    "node": ">=6"
+  },
   "main": "servify.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
