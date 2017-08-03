@@ -1,27 +1,24 @@
-var servify = require("./../servify.js");
+var servify = require("./..");
 var assert = require("assert");
 
 describe("Servify", function(){
-  it("must be able to create a service and call its functions", function(){
+  it("must be able to create a service and call its functions", async () => {
 
     // Creates service
     var count = 0;
-    return servify.api(7171, {
+    
+    await servify.api(7171, {
       square: (x) => x * x,
       concat: (a, b) => a.concat(b),
       count: () => ++count
-    }).then(() => {
-
-      // Uses service
-      var lib = servify.at("http://localhost:7171");
-      return Promise.all([
-        lib.square(3).then(x => assert.equal(x, 9)),
-        lib.concat([1,2],[3,4]).then(x => assert.equal(JSON.stringify(x), "[1,2,3,4]")),
-        lib.count().then(x => assert.equal(JSON.stringify(x), "1"))
-      ]);
-
-    }).catch(function(err){
-      console.log(err);
     });
+
+    // Uses service
+    var lib = servify.at("http://localhost:7171");
+
+    assert(await lib.square(3) === 9);
+    assert(await lib.count() === 1);
+    assert(JSON.stringify(await lib.concat([1,2],[3,4])) === "[1,2,3,4]");
+
   });
 });

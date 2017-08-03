@@ -1,11 +1,12 @@
 {
   "name": "servify",
-  "version": "0.1.11",
+  "version": "0.1.13",
   "description": "",
   "engines": {
     "node": ">=6"
   },
-  "main": "servify.js",
+  "main": "servify-node.js",
+  "browser": "servify-browser.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "browserify servify.js > dist/servify.bundle.js; ccjs dist/servify.bundle.js > dist/servify.min.js"
@@ -14,10 +15,9 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.16.0",
+    "cors": "^2.8.1",
     "express": "^4.14.0",
-    "request": "^2.79.0",
-    "xhr": "^2.3.3",
-    "cors": "^2.8.1"
+    "xhr-request-promise": "^0.1.2"
   },
   "repository": {
     "type": "git",
